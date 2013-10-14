@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 //this is a test of our weekly tornado warning.
+//test 2
 namespace JohnMikeTestCode.Controllers
 {
     public class HomeController : Controller
