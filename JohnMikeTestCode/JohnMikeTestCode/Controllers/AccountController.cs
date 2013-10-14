@@ -10,7 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using JohnMikeTestCode.Filters;
 using JohnMikeTestCode.Models;
-
+//Not that funny
 namespace JohnMikeTestCode.Controllers
 {
     [Authorize]
