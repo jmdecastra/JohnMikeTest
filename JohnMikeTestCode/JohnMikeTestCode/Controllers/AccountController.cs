@@ -11,6 +11,7 @@ using WebMatrix.WebData;
 using JohnMikeTestCode.Filters;
 using JohnMikeTestCode.Models;
 //Not That Funny hahahahaha
+//testing if i can merge mikestest with johnstest branches
 namespace JohnMikeTestCode.Controllers
 {
     [Authorize]
