@@ -13,7 +13,7 @@ using JohnMikeTestCode.Models;
 //Not That Funny hahahahaha
 //testing if i can merge mikestest with johnstest branches
 //testing johnsbranch- then syncing with mikesbranch but not master (worked)
-//testing mikesbranch- then syncing with johnsbranch but not master
+//testing mikesbranch- then syncing with johnsbranch but not master (worked)
 namespace JohnMikeTestCode.Controllers
 {
     [Authorize]
