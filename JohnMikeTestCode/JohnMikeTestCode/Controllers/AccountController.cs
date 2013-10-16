@@ -12,6 +12,7 @@ using JohnMikeTestCode.Filters;
 using JohnMikeTestCode.Models;
 //Not That Funny hahahahaha
 //testing if i can merge mikestest with johnstest branches
+//testing johnsbranch- then syncing with mikesbranch but not master
 namespace JohnMikeTestCode.Controllers
 {
     [Authorize]
