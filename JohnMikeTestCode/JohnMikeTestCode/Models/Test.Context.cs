@@ -13,10 +13,10 @@ namespace JohnMikeTestCode.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class Test : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public Test()
+            : base("name=Test")
         {
         }
     
@@ -25,5 +25,6 @@ namespace JohnMikeTestCode.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Employee> Employees { get; set; }
     }
 }
