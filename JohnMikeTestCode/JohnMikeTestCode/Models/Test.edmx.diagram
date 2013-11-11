@@ -6,6 +6,27 @@
     <edmx:Diagrams>
       <Diagram DiagramId="b0872eb6c114432e805f7a0ede0a85dd" Name="Diagram1">
         <EntityTypeShape EntityType="Model.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CYCLEFREQUENCY" Width="1.5" PointX="4.8573100738494244" PointY="5.3205169464091382" />
+        <EntityTypeShape EntityType="Model.ELSTWAREHOUSE" Width="1.5" PointX="8.9177305181127657" PointY="3.4910444037481416" />
+        <EntityTypeShape EntityType="Model.MACHINE" Width="1.5" PointX="11.946369515706957" PointY="9.7249461606726726" />
+        <EntityTypeShape EntityType="Model.MACHINETIMING" Width="1.5" PointX="4.8395955193972195" PointY="30.560988023207052" />
+        <EntityTypeShape EntityType="Model.OBSERVATION" Width="1.5" PointX="9.2887043325643539" PointY="23.461577590304231" />
+        <EntityTypeShape EntityType="Model.OBSERVATIONASSIGNMENT" Width="1.5" PointX="6.9653067099700241" PointY="21.829118783506154" />
+        <EntityTypeShape EntityType="Model.OBSERVATIONSHEET" Width="1.5" PointX="0.14643289341890853" PointY="4.454888837623824" />
+        <EntityTypeShape EntityType="Model.PREFERREDMETHOD" Width="1.5" PointX="7.4281846673359091" PointY="1.8976042428508422" />
+        <EntityTypeShape EntityType="Model.PREFERREDMETHODLINE" Width="1.5" PointX="3.4228622053856319" PointY="18.486406588222088" />
+        <AssociationConnector Association="Model.FKCYCLEFREQ_OBSASSIGNID" />
+        <AssociationConnector Association="Model.FKCYCLEFREQ_OBSID" />
+        <AssociationConnector Association="Model.FKMACH_WHID" />
+        <AssociationConnector Association="Model.FKMACHTIMING_ELSTWHID" />
+        <AssociationConnector Association="Model.FKOBS_ELSTWHID" />
+        <AssociationConnector Association="Model.FKOBSSHEET_ELSTWHID" />
+        <AssociationConnector Association="Model.FKPREFERREDMETHOD_ELSTWHID" />
+        <AssociationConnector Association="Model.FKMACHTIMING_MID" />
+        <AssociationConnector Association="Model.FKOBS_OBSSHEETID" />
+        <AssociationConnector Association="Model.FKOBSASSIGN_OBSSHEETID" />
+        <AssociationConnector Association="Model.FKOBSSHEET_PREFMETHID" />
+        <AssociationConnector Association="Model.FKPREFMETHLINE_PREFMETHID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

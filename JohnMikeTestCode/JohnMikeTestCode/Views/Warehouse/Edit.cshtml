@@ -1,0 +1,44 @@
+﻿@model JohnMikeTestCode.Models.ELSTWAREHOUSE
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ELSTWAREHOUSE</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ELSTWHID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ELSTWHID)
+            @Html.ValidationMessageFor(model => model.ELSTWHID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ELSTWHNAME)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ELSTWHNAME)
+            @Html.ValidationMessageFor(model => model.ELSTWHNAME)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

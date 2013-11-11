@@ -1,0 +1,29 @@
+﻿@model JohnMikeTestCode.Models.ELSTWAREHOUSE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ELSTWAREHOUSE</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ELSTWHID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ELSTWHID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ELSTWHNAME)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ELSTWHNAME)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

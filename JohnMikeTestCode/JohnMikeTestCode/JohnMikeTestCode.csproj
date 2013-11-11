@@ -186,12 +186,40 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CYCLEFREQUENCY.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ELSTWAREHOUSE.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Employee.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MACHINE.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MACHINETIMING.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OBSERVATION.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OBSERVATIONASSIGNMENT.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OBSERVATIONSHEET.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PREFERREDMETHOD.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PREFERREDMETHODLINE.cs">
       <DependentUpon>Test.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Test.Context.cs">
@@ -346,6 +374,11 @@
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Employee\Delete.cshtml" />
+    <Content Include="Views\Warehouse\Index.cshtml" />
+    <Content Include="Views\Warehouse\Details.cshtml" />
+    <Content Include="Views\Warehouse\Create.cshtml" />
+    <Content Include="Views\Warehouse\Edit.cshtml" />
+    <Content Include="Views\Warehouse\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

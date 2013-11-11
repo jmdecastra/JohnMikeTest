@@ -26,5 +26,14 @@ namespace JohnMikeTestCode.Models
         }
     
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<CYCLEFREQUENCY> CYCLEFREQUENCies { get; set; }
+        public DbSet<ELSTWAREHOUSE> ELSTWAREHOUSEs { get; set; }
+        public DbSet<MACHINE> MACHINEs { get; set; }
+        public DbSet<MACHINETIMING> MACHINETIMINGs { get; set; }
+        public DbSet<OBSERVATION> OBSERVATIONs { get; set; }
+        public DbSet<OBSERVATIONASSIGNMENT> OBSERVATIONASSIGNMENTs { get; set; }
+        public DbSet<OBSERVATIONSHEET> OBSERVATIONSHEETs { get; set; }
+        public DbSet<PREFERREDMETHOD> PREFERREDMETHODs { get; set; }
+        public DbSet<PREFERREDMETHODLINE> PREFERREDMETHODLINEs { get; set; }
     }
 }

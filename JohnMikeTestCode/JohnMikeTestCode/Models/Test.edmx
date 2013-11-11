@@ -4,10 +4,84 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Alias="Self" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Alias="Self" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="CYCLEFREQUENCY" EntityType="Model.Store.CYCLEFREQUENCY" store:Type="Tables" Schema="MIKE" />
+          <EntitySet Name="ELSTWAREHOUSE" EntityType="Model.Store.ELSTWAREHOUSE" store:Type="Tables" Schema="MIKE" />
           <EntitySet Name="Employee" EntityType="Model.Store.Employee" store:Type="Tables" Schema="MIKE" />
+          <EntitySet Name="MACHINE" EntityType="Model.Store.MACHINE" store:Type="Tables" Schema="MIKE" />
+          <EntitySet Name="MACHINETIMING" EntityType="Model.Store.MACHINETIMING" store:Type="Tables" Schema="MIKE" />
+          <EntitySet Name="OBSERVATION" EntityType="Model.Store.OBSERVATION" store:Type="Tables" Schema="MIKE" />
+          <EntitySet Name="OBSERVATIONASSIGNMENT" EntityType="Model.Store.OBSERVATIONASSIGNMENT" store:Type="Tables" Schema="MIKE" />
+          <EntitySet Name="OBSERVATIONSHEET" EntityType="Model.Store.OBSERVATIONSHEET" store:Type="Tables" Schema="MIKE" />
+          <EntitySet Name="PREFERREDMETHOD" EntityType="Model.Store.PREFERREDMETHOD" store:Type="Tables" Schema="MIKE" />
+          <EntitySet Name="PREFERREDMETHODLINE" EntityType="Model.Store.PREFERREDMETHODLINE" store:Type="Tables" Schema="MIKE" />
+          <AssociationSet Name="FKCYCLEFREQ_OBSASSIGNID" Association="Model.Store.FKCYCLEFREQ_OBSASSIGNID">
+            <End Role="OBSERVATIONASSIGNMENT" EntitySet="OBSERVATIONASSIGNMENT" />
+            <End Role="CYCLEFREQUENCY" EntitySet="CYCLEFREQUENCY" />
+          </AssociationSet>
+          <AssociationSet Name="FKCYCLEFREQ_OBSID" Association="Model.Store.FKCYCLEFREQ_OBSID">
+            <End Role="OBSERVATION" EntitySet="OBSERVATION" />
+            <End Role="CYCLEFREQUENCY" EntitySet="CYCLEFREQUENCY" />
+          </AssociationSet>
+          <AssociationSet Name="FKMACH_WHID" Association="Model.Store.FKMACH_WHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSE" />
+            <End Role="MACHINE" EntitySet="MACHINE" />
+          </AssociationSet>
+          <AssociationSet Name="FKMACHTIMING_ELSTWHID" Association="Model.Store.FKMACHTIMING_ELSTWHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSE" />
+            <End Role="MACHINETIMING" EntitySet="MACHINETIMING" />
+          </AssociationSet>
+          <AssociationSet Name="FKMACHTIMING_MID" Association="Model.Store.FKMACHTIMING_MID">
+            <End Role="MACHINE" EntitySet="MACHINE" />
+            <End Role="MACHINETIMING" EntitySet="MACHINETIMING" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBS_ELSTWHID" Association="Model.Store.FKOBS_ELSTWHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSE" />
+            <End Role="OBSERVATION" EntitySet="OBSERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBS_OBSSHEETID" Association="Model.Store.FKOBS_OBSSHEETID">
+            <End Role="OBSERVATIONSHEET" EntitySet="OBSERVATIONSHEET" />
+            <End Role="OBSERVATION" EntitySet="OBSERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBSASSIGN_OBSSHEETID" Association="Model.Store.FKOBSASSIGN_OBSSHEETID">
+            <End Role="OBSERVATIONSHEET" EntitySet="OBSERVATIONSHEET" />
+            <End Role="OBSERVATIONASSIGNMENT" EntitySet="OBSERVATIONASSIGNMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBSSHEET_ELSTWHID" Association="Model.Store.FKOBSSHEET_ELSTWHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSE" />
+            <End Role="OBSERVATIONSHEET" EntitySet="OBSERVATIONSHEET" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBSSHEET_PREFMETHID" Association="Model.Store.FKOBSSHEET_PREFMETHID">
+            <End Role="PREFERREDMETHOD" EntitySet="PREFERREDMETHOD" />
+            <End Role="OBSERVATIONSHEET" EntitySet="OBSERVATIONSHEET" />
+          </AssociationSet>
+          <AssociationSet Name="FKPREFERREDMETHOD_ELSTWHID" Association="Model.Store.FKPREFERREDMETHOD_ELSTWHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSE" />
+            <End Role="PREFERREDMETHOD" EntitySet="PREFERREDMETHOD" />
+          </AssociationSet>
+          <AssociationSet Name="FKPREFMETHLINE_PREFMETHID" Association="Model.Store.FKPREFMETHLINE_PREFMETHID">
+            <End Role="PREFERREDMETHOD" EntitySet="PREFERREDMETHOD" />
+            <End Role="PREFERREDMETHODLINE" EntitySet="PREFERREDMETHODLINE" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CYCLEFREQUENCY">
+          <Key>
+            <PropertyRef Name="CYCLEFREQNUMBER" />
+          </Key>
+          <Property Name="CYCLEFREQID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="OBSASSIGNID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="OBSID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="CYCLEFREQNUMBER" Type="number" Nullable="false" />
+          <Property Name="CYCLEFREQCOUNT" Type="varchar2" Nullable="false" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="ELSTWAREHOUSE">
+          <Key>
+            <PropertyRef Name="ELSTWHID" />
+          </Key>
+          <Property Name="ELSTWHID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="ELSTWHNAME" Type="varchar2" Nullable="false" MaxLength="100" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="emp_ID" />
@@ -16,13 +90,286 @@
           <Property Name="emp_FirstName" Type="varchar2" MaxLength="30" />
           <Property Name="emp_LastName" Type="varchar2" MaxLength="30" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+        <EntityType Name="MACHINE">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Name="MID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="MNAME" Type="varchar2" MaxLength="25" />
+          <Property Name="WHID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="WHNAME" Type="varchar2" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MACHINETIMING">
+          <Key>
+            <PropertyRef Name="MTID" />
+          </Key>
+          <Property Name="MTID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="ELSTWHID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="MTMACHINETYPE" Type="varchar2" Nullable="false" MaxLength="50" />
+          <Property Name="MTSTARTTIME" Type="timestamp" />
+          <Property Name="MTENDTIME" Type="timestamp" />
+          <Property Name="MTDURATION" Type="varchar2" MaxLength="20" />
+          <Property Name="MTDISTANCE" Type="varchar2" MaxLength="25" />
+          <Property Name="MTTIMINGTYPE" Type="varchar2" Nullable="false" MaxLength="25" />
+          <Property Name="MTDESC" Type="varchar2" MaxLength="20" />
+          <Property Name="MID" Type="varchar2" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="OBSERVATION">
+          <Key>
+            <PropertyRef Name="OBSID" />
+          </Key>
+          <Property Name="OBSID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="ELSTWHID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="OBSSHEETID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="OBSDATETIME" Type="timestamp" Nullable="false" />
+          <Property Name="OBSDURATION" Type="varchar2" MaxLength="20" />
+          <Property Name="OBSNOTES" Type="varchar2" MaxLength="500" />
+          <Property Name="OBSWARNINGFLAG" Type="char" Nullable="false" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="OBSERVATIONASSIGNMENT">
+          <Key>
+            <PropertyRef Name="OBSASSIGNID" />
+          </Key>
+          <Property Name="OBSASSIGNID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="OBSSHEETID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="OBSASSIGNDESC" Type="varchar2" Nullable="false" MaxLength="500" />
+          <Property Name="OBSASSIGNSEQ" Type="number" Nullable="false" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="OBSERVATIONSHEET">
+          <Key>
+            <PropertyRef Name="OBSSHEETID" />
+          </Key>
+          <Property Name="OBSSHEETID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="ELSTWHID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="PREFMETHID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="OBSSHEETNAME" Type="varchar2" Nullable="false" MaxLength="50" />
+          <Property Name="OBSSHEETDESC" Type="varchar2" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PREFERREDMETHOD">
+          <Key>
+            <PropertyRef Name="PREFMETHID" />
+          </Key>
+          <Property Name="PREFMETHID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="ELSTWHID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="PREFMETHNAME" Type="varchar2" Nullable="false" MaxLength="100" />
+          <Property Name="PREFMETHDESC" Type="varchar2" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="PREFERREDMETHODLINE">
+          <Key>
+            <PropertyRef Name="PREFMETHLINEID" />
+          </Key>
+          <Property Name="PREFMETHLINEID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="PREFMETHID" Type="varchar2" Nullable="false" MaxLength="20" />
+          <Property Name="PREFMETHLINEDESC" Type="varchar2" Nullable="false" MaxLength="500" />
+          <Property Name="PREFMETHLINESEQ" Type="number" Nullable="false" Precision="5" Scale="2" />
+        </EntityType>
+        <Association Name="FKCYCLEFREQ_OBSASSIGNID">
+          <End Role="OBSERVATIONASSIGNMENT" Type="Model.Store.OBSERVATIONASSIGNMENT" Multiplicity="1" />
+          <End Role="CYCLEFREQUENCY" Type="Model.Store.CYCLEFREQUENCY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBSERVATIONASSIGNMENT">
+              <PropertyRef Name="OBSASSIGNID" />
+            </Principal>
+            <Dependent Role="CYCLEFREQUENCY">
+              <PropertyRef Name="OBSASSIGNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCYCLEFREQ_OBSID">
+          <End Role="OBSERVATION" Type="Model.Store.OBSERVATION" Multiplicity="1" />
+          <End Role="CYCLEFREQUENCY" Type="Model.Store.CYCLEFREQUENCY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBSERVATION">
+              <PropertyRef Name="OBSID" />
+            </Principal>
+            <Dependent Role="CYCLEFREQUENCY">
+              <PropertyRef Name="OBSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMACH_WHID">
+          <End Role="ELSTWAREHOUSE" Type="Model.Store.ELSTWAREHOUSE" Multiplicity="1" />
+          <End Role="MACHINE" Type="Model.Store.MACHINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="MACHINE">
+              <PropertyRef Name="WHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMACHTIMING_ELSTWHID">
+          <End Role="ELSTWAREHOUSE" Type="Model.Store.ELSTWAREHOUSE" Multiplicity="1" />
+          <End Role="MACHINETIMING" Type="Model.Store.MACHINETIMING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="MACHINETIMING">
+              <PropertyRef Name="ELSTWHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMACHTIMING_MID">
+          <End Role="MACHINE" Type="Model.Store.MACHINE" Multiplicity="1" />
+          <End Role="MACHINETIMING" Type="Model.Store.MACHINETIMING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINE">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="MACHINETIMING">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBS_ELSTWHID">
+          <End Role="ELSTWAREHOUSE" Type="Model.Store.ELSTWAREHOUSE" Multiplicity="1" />
+          <End Role="OBSERVATION" Type="Model.Store.OBSERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="OBSERVATION">
+              <PropertyRef Name="ELSTWHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBS_OBSSHEETID">
+          <End Role="OBSERVATIONSHEET" Type="Model.Store.OBSERVATIONSHEET" Multiplicity="1" />
+          <End Role="OBSERVATION" Type="Model.Store.OBSERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBSERVATIONSHEET">
+              <PropertyRef Name="OBSSHEETID" />
+            </Principal>
+            <Dependent Role="OBSERVATION">
+              <PropertyRef Name="OBSSHEETID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBSASSIGN_OBSSHEETID">
+          <End Role="OBSERVATIONSHEET" Type="Model.Store.OBSERVATIONSHEET" Multiplicity="1" />
+          <End Role="OBSERVATIONASSIGNMENT" Type="Model.Store.OBSERVATIONASSIGNMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBSERVATIONSHEET">
+              <PropertyRef Name="OBSSHEETID" />
+            </Principal>
+            <Dependent Role="OBSERVATIONASSIGNMENT">
+              <PropertyRef Name="OBSSHEETID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBSSHEET_ELSTWHID">
+          <End Role="ELSTWAREHOUSE" Type="Model.Store.ELSTWAREHOUSE" Multiplicity="1" />
+          <End Role="OBSERVATIONSHEET" Type="Model.Store.OBSERVATIONSHEET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="OBSERVATIONSHEET">
+              <PropertyRef Name="ELSTWHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBSSHEET_PREFMETHID">
+          <End Role="PREFERREDMETHOD" Type="Model.Store.PREFERREDMETHOD" Multiplicity="1" />
+          <End Role="OBSERVATIONSHEET" Type="Model.Store.OBSERVATIONSHEET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREFERREDMETHOD">
+              <PropertyRef Name="PREFMETHID" />
+            </Principal>
+            <Dependent Role="OBSERVATIONSHEET">
+              <PropertyRef Name="PREFMETHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPREFERREDMETHOD_ELSTWHID">
+          <End Role="ELSTWAREHOUSE" Type="Model.Store.ELSTWAREHOUSE" Multiplicity="1" />
+          <End Role="PREFERREDMETHOD" Type="Model.Store.PREFERREDMETHOD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="PREFERREDMETHOD">
+              <PropertyRef Name="ELSTWHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPREFMETHLINE_PREFMETHID">
+          <End Role="PREFERREDMETHOD" Type="Model.Store.PREFERREDMETHOD" Multiplicity="1" />
+          <End Role="PREFERREDMETHODLINE" Type="Model.Store.PREFERREDMETHODLINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREFERREDMETHOD">
+              <PropertyRef Name="PREFMETHID" />
+            </Principal>
+            <Dependent Role="PREFERREDMETHODLINE">
+              <PropertyRef Name="PREFMETHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Test" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Employees" EntityType="Model.Employee" />
+          <EntitySet Name="CYCLEFREQUENCies" EntityType="Model.CYCLEFREQUENCY" />
+          <EntitySet Name="ELSTWAREHOUSEs" EntityType="Model.ELSTWAREHOUSE" />
+          <EntitySet Name="MACHINEs" EntityType="Model.MACHINE" />
+          <EntitySet Name="MACHINETIMINGs" EntityType="Model.MACHINETIMING" />
+          <EntitySet Name="OBSERVATIONs" EntityType="Model.OBSERVATION" />
+          <EntitySet Name="OBSERVATIONASSIGNMENTs" EntityType="Model.OBSERVATIONASSIGNMENT" />
+          <EntitySet Name="OBSERVATIONSHEETs" EntityType="Model.OBSERVATIONSHEET" />
+          <EntitySet Name="PREFERREDMETHODs" EntityType="Model.PREFERREDMETHOD" />
+          <EntitySet Name="PREFERREDMETHODLINEs" EntityType="Model.PREFERREDMETHODLINE" />
+          <AssociationSet Name="FKCYCLEFREQ_OBSASSIGNID" Association="Model.FKCYCLEFREQ_OBSASSIGNID">
+            <End Role="OBSERVATIONASSIGNMENT" EntitySet="OBSERVATIONASSIGNMENTs" />
+            <End Role="CYCLEFREQUENCY" EntitySet="CYCLEFREQUENCies" />
+          </AssociationSet>
+          <AssociationSet Name="FKCYCLEFREQ_OBSID" Association="Model.FKCYCLEFREQ_OBSID">
+            <End Role="OBSERVATION" EntitySet="OBSERVATIONs" />
+            <End Role="CYCLEFREQUENCY" EntitySet="CYCLEFREQUENCies" />
+          </AssociationSet>
+          <AssociationSet Name="FKMACH_WHID" Association="Model.FKMACH_WHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSEs" />
+            <End Role="MACHINE" EntitySet="MACHINEs" />
+          </AssociationSet>
+          <AssociationSet Name="FKMACHTIMING_ELSTWHID" Association="Model.FKMACHTIMING_ELSTWHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSEs" />
+            <End Role="MACHINETIMING" EntitySet="MACHINETIMINGs" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBS_ELSTWHID" Association="Model.FKOBS_ELSTWHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSEs" />
+            <End Role="OBSERVATION" EntitySet="OBSERVATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBSSHEET_ELSTWHID" Association="Model.FKOBSSHEET_ELSTWHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSEs" />
+            <End Role="OBSERVATIONSHEET" EntitySet="OBSERVATIONSHEETs" />
+          </AssociationSet>
+          <AssociationSet Name="FKPREFERREDMETHOD_ELSTWHID" Association="Model.FKPREFERREDMETHOD_ELSTWHID">
+            <End Role="ELSTWAREHOUSE" EntitySet="ELSTWAREHOUSEs" />
+            <End Role="PREFERREDMETHOD" EntitySet="PREFERREDMETHODs" />
+          </AssociationSet>
+          <AssociationSet Name="FKMACHTIMING_MID" Association="Model.FKMACHTIMING_MID">
+            <End Role="MACHINE" EntitySet="MACHINEs" />
+            <End Role="MACHINETIMING" EntitySet="MACHINETIMINGs" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBS_OBSSHEETID" Association="Model.FKOBS_OBSSHEETID">
+            <End Role="OBSERVATIONSHEET" EntitySet="OBSERVATIONSHEETs" />
+            <End Role="OBSERVATION" EntitySet="OBSERVATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBSASSIGN_OBSSHEETID" Association="Model.FKOBSASSIGN_OBSSHEETID">
+            <End Role="OBSERVATIONSHEET" EntitySet="OBSERVATIONSHEETs" />
+            <End Role="OBSERVATIONASSIGNMENT" EntitySet="OBSERVATIONASSIGNMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FKOBSSHEET_PREFMETHID" Association="Model.FKOBSSHEET_PREFMETHID">
+            <End Role="PREFERREDMETHOD" EntitySet="PREFERREDMETHODs" />
+            <End Role="OBSERVATIONSHEET" EntitySet="OBSERVATIONSHEETs" />
+          </AssociationSet>
+          <AssociationSet Name="FKPREFMETHLINE_PREFMETHID" Association="Model.FKPREFMETHLINE_PREFMETHID">
+            <End Role="PREFERREDMETHOD" EntitySet="PREFERREDMETHODs" />
+            <End Role="PREFERREDMETHODLINE" EntitySet="PREFERREDMETHODLINEs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -32,6 +379,264 @@
           <Property Name="emp_FirstName" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
           <Property Name="emp_LastName" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
         </EntityType>
+        <EntityType Name="CYCLEFREQUENCY">
+          <Key>
+            <PropertyRef Name="CYCLEFREQNUMBER" />
+          </Key>
+          <Property Type="String" Name="CYCLEFREQID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OBSASSIGNID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OBSID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="CYCLEFREQNUMBER" Nullable="false" Precision="38" Scale="0" />
+          <Property Type="String" Name="CYCLEFREQCOUNT" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OBSERVATIONASSIGNMENT" Relationship="Model.FKCYCLEFREQ_OBSASSIGNID" FromRole="CYCLEFREQUENCY" ToRole="OBSERVATIONASSIGNMENT" />
+          <NavigationProperty Name="OBSERVATION" Relationship="Model.FKCYCLEFREQ_OBSID" FromRole="CYCLEFREQUENCY" ToRole="OBSERVATION" />
+        </EntityType>
+        <EntityType Name="ELSTWAREHOUSE">
+          <Key>
+            <PropertyRef Name="ELSTWHID" />
+          </Key>
+          <Property Type="String" Name="ELSTWHID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ELSTWHNAME" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MACHINEs" Relationship="Model.FKMACH_WHID" FromRole="ELSTWAREHOUSE" ToRole="MACHINE" />
+          <NavigationProperty Name="MACHINETIMINGs" Relationship="Model.FKMACHTIMING_ELSTWHID" FromRole="ELSTWAREHOUSE" ToRole="MACHINETIMING" />
+          <NavigationProperty Name="OBSERVATIONs" Relationship="Model.FKOBS_ELSTWHID" FromRole="ELSTWAREHOUSE" ToRole="OBSERVATION" />
+          <NavigationProperty Name="OBSERVATIONSHEETs" Relationship="Model.FKOBSSHEET_ELSTWHID" FromRole="ELSTWAREHOUSE" ToRole="OBSERVATIONSHEET" />
+          <NavigationProperty Name="PREFERREDMETHODs" Relationship="Model.FKPREFERREDMETHOD_ELSTWHID" FromRole="ELSTWAREHOUSE" ToRole="PREFERREDMETHOD" />
+        </EntityType>
+        <EntityType Name="MACHINE">
+          <Key>
+            <PropertyRef Name="MID" />
+          </Key>
+          <Property Type="String" Name="MID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MNAME" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WHID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WHNAME" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ELSTWAREHOUSE" Relationship="Model.FKMACH_WHID" FromRole="MACHINE" ToRole="ELSTWAREHOUSE" />
+          <NavigationProperty Name="MACHINETIMINGs" Relationship="Model.FKMACHTIMING_MID" FromRole="MACHINE" ToRole="MACHINETIMING" />
+        </EntityType>
+        <EntityType Name="MACHINETIMING">
+          <Key>
+            <PropertyRef Name="MTID" />
+          </Key>
+          <Property Type="String" Name="MTID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ELSTWHID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MTMACHINETYPE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="MTSTARTTIME" Precision="6" />
+          <Property Type="DateTime" Name="MTENDTIME" Precision="6" />
+          <Property Type="String" Name="MTDURATION" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MTDISTANCE" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MTTIMINGTYPE" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MTDESC" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ELSTWAREHOUSE" Relationship="Model.FKMACHTIMING_ELSTWHID" FromRole="MACHINETIMING" ToRole="ELSTWAREHOUSE" />
+          <NavigationProperty Name="MACHINE" Relationship="Model.FKMACHTIMING_MID" FromRole="MACHINETIMING" ToRole="MACHINE" />
+        </EntityType>
+        <EntityType Name="OBSERVATION">
+          <Key>
+            <PropertyRef Name="OBSID" />
+          </Key>
+          <Property Type="String" Name="OBSID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ELSTWHID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OBSSHEETID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="OBSDATETIME" Nullable="false" Precision="6" />
+          <Property Type="String" Name="OBSDURATION" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OBSNOTES" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OBSWARNINGFLAG" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CYCLEFREQUENCies" Relationship="Model.FKCYCLEFREQ_OBSID" FromRole="OBSERVATION" ToRole="CYCLEFREQUENCY" />
+          <NavigationProperty Name="ELSTWAREHOUSE" Relationship="Model.FKOBS_ELSTWHID" FromRole="OBSERVATION" ToRole="ELSTWAREHOUSE" />
+          <NavigationProperty Name="OBSERVATIONSHEET" Relationship="Model.FKOBS_OBSSHEETID" FromRole="OBSERVATION" ToRole="OBSERVATIONSHEET" />
+        </EntityType>
+        <EntityType Name="OBSERVATIONASSIGNMENT">
+          <Key>
+            <PropertyRef Name="OBSASSIGNID" />
+          </Key>
+          <Property Type="String" Name="OBSASSIGNID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OBSSHEETID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OBSASSIGNDESC" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="OBSASSIGNSEQ" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="CYCLEFREQUENCies" Relationship="Model.FKCYCLEFREQ_OBSASSIGNID" FromRole="OBSERVATIONASSIGNMENT" ToRole="CYCLEFREQUENCY" />
+          <NavigationProperty Name="OBSERVATIONSHEET" Relationship="Model.FKOBSASSIGN_OBSSHEETID" FromRole="OBSERVATIONASSIGNMENT" ToRole="OBSERVATIONSHEET" />
+        </EntityType>
+        <EntityType Name="OBSERVATIONSHEET">
+          <Key>
+            <PropertyRef Name="OBSSHEETID" />
+          </Key>
+          <Property Type="String" Name="OBSSHEETID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ELSTWHID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PREFMETHID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OBSSHEETNAME" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OBSSHEETDESC" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ELSTWAREHOUSE" Relationship="Model.FKOBSSHEET_ELSTWHID" FromRole="OBSERVATIONSHEET" ToRole="ELSTWAREHOUSE" />
+          <NavigationProperty Name="OBSERVATIONs" Relationship="Model.FKOBS_OBSSHEETID" FromRole="OBSERVATIONSHEET" ToRole="OBSERVATION" />
+          <NavigationProperty Name="OBSERVATIONASSIGNMENTs" Relationship="Model.FKOBSASSIGN_OBSSHEETID" FromRole="OBSERVATIONSHEET" ToRole="OBSERVATIONASSIGNMENT" />
+          <NavigationProperty Name="PREFERREDMETHOD" Relationship="Model.FKOBSSHEET_PREFMETHID" FromRole="OBSERVATIONSHEET" ToRole="PREFERREDMETHOD" />
+        </EntityType>
+        <EntityType Name="PREFERREDMETHOD">
+          <Key>
+            <PropertyRef Name="PREFMETHID" />
+          </Key>
+          <Property Type="String" Name="PREFMETHID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ELSTWHID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PREFMETHNAME" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PREFMETHDESC" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ELSTWAREHOUSE" Relationship="Model.FKPREFERREDMETHOD_ELSTWHID" FromRole="PREFERREDMETHOD" ToRole="ELSTWAREHOUSE" />
+          <NavigationProperty Name="OBSERVATIONSHEETs" Relationship="Model.FKOBSSHEET_PREFMETHID" FromRole="PREFERREDMETHOD" ToRole="OBSERVATIONSHEET" />
+          <NavigationProperty Name="PREFERREDMETHODLINEs" Relationship="Model.FKPREFMETHLINE_PREFMETHID" FromRole="PREFERREDMETHOD" ToRole="PREFERREDMETHODLINE" />
+        </EntityType>
+        <EntityType Name="PREFERREDMETHODLINE">
+          <Key>
+            <PropertyRef Name="PREFMETHLINEID" />
+          </Key>
+          <Property Type="String" Name="PREFMETHLINEID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PREFMETHID" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PREFMETHLINEDESC" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="PREFMETHLINESEQ" Nullable="false" Precision="5" Scale="2" />
+          <NavigationProperty Name="PREFERREDMETHOD" Relationship="Model.FKPREFMETHLINE_PREFMETHID" FromRole="PREFERREDMETHODLINE" ToRole="PREFERREDMETHOD" />
+        </EntityType>
+        <Association Name="FKCYCLEFREQ_OBSASSIGNID">
+          <End Type="Model.OBSERVATIONASSIGNMENT" Role="OBSERVATIONASSIGNMENT" Multiplicity="1" />
+          <End Type="Model.CYCLEFREQUENCY" Role="CYCLEFREQUENCY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBSERVATIONASSIGNMENT">
+              <PropertyRef Name="OBSASSIGNID" />
+            </Principal>
+            <Dependent Role="CYCLEFREQUENCY">
+              <PropertyRef Name="OBSASSIGNID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCYCLEFREQ_OBSID">
+          <End Type="Model.OBSERVATION" Role="OBSERVATION" Multiplicity="1" />
+          <End Type="Model.CYCLEFREQUENCY" Role="CYCLEFREQUENCY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBSERVATION">
+              <PropertyRef Name="OBSID" />
+            </Principal>
+            <Dependent Role="CYCLEFREQUENCY">
+              <PropertyRef Name="OBSID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMACH_WHID">
+          <End Type="Model.ELSTWAREHOUSE" Role="ELSTWAREHOUSE" Multiplicity="1" />
+          <End Type="Model.MACHINE" Role="MACHINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="MACHINE">
+              <PropertyRef Name="WHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMACHTIMING_ELSTWHID">
+          <End Type="Model.ELSTWAREHOUSE" Role="ELSTWAREHOUSE" Multiplicity="1" />
+          <End Type="Model.MACHINETIMING" Role="MACHINETIMING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="MACHINETIMING">
+              <PropertyRef Name="ELSTWHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBS_ELSTWHID">
+          <End Type="Model.ELSTWAREHOUSE" Role="ELSTWAREHOUSE" Multiplicity="1" />
+          <End Type="Model.OBSERVATION" Role="OBSERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="OBSERVATION">
+              <PropertyRef Name="ELSTWHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBSSHEET_ELSTWHID">
+          <End Type="Model.ELSTWAREHOUSE" Role="ELSTWAREHOUSE" Multiplicity="1" />
+          <End Type="Model.OBSERVATIONSHEET" Role="OBSERVATIONSHEET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="OBSERVATIONSHEET">
+              <PropertyRef Name="ELSTWHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPREFERREDMETHOD_ELSTWHID">
+          <End Type="Model.ELSTWAREHOUSE" Role="ELSTWAREHOUSE" Multiplicity="1" />
+          <End Type="Model.PREFERREDMETHOD" Role="PREFERREDMETHOD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ELSTWAREHOUSE">
+              <PropertyRef Name="ELSTWHID" />
+            </Principal>
+            <Dependent Role="PREFERREDMETHOD">
+              <PropertyRef Name="ELSTWHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKMACHTIMING_MID">
+          <End Type="Model.MACHINE" Role="MACHINE" Multiplicity="1" />
+          <End Type="Model.MACHINETIMING" Role="MACHINETIMING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINE">
+              <PropertyRef Name="MID" />
+            </Principal>
+            <Dependent Role="MACHINETIMING">
+              <PropertyRef Name="MID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBS_OBSSHEETID">
+          <End Type="Model.OBSERVATIONSHEET" Role="OBSERVATIONSHEET" Multiplicity="1" />
+          <End Type="Model.OBSERVATION" Role="OBSERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBSERVATIONSHEET">
+              <PropertyRef Name="OBSSHEETID" />
+            </Principal>
+            <Dependent Role="OBSERVATION">
+              <PropertyRef Name="OBSSHEETID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBSASSIGN_OBSSHEETID">
+          <End Type="Model.OBSERVATIONSHEET" Role="OBSERVATIONSHEET" Multiplicity="1" />
+          <End Type="Model.OBSERVATIONASSIGNMENT" Role="OBSERVATIONASSIGNMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OBSERVATIONSHEET">
+              <PropertyRef Name="OBSSHEETID" />
+            </Principal>
+            <Dependent Role="OBSERVATIONASSIGNMENT">
+              <PropertyRef Name="OBSSHEETID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOBSSHEET_PREFMETHID">
+          <End Type="Model.PREFERREDMETHOD" Role="PREFERREDMETHOD" Multiplicity="1" />
+          <End Type="Model.OBSERVATIONSHEET" Role="OBSERVATIONSHEET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREFERREDMETHOD">
+              <PropertyRef Name="PREFMETHID" />
+            </Principal>
+            <Dependent Role="OBSERVATIONSHEET">
+              <PropertyRef Name="PREFMETHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPREFMETHLINE_PREFMETHID">
+          <End Type="Model.PREFERREDMETHOD" Role="PREFERREDMETHOD" Multiplicity="1" />
+          <End Type="Model.PREFERREDMETHODLINE" Role="PREFERREDMETHODLINE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREFERREDMETHOD">
+              <PropertyRef Name="PREFMETHID" />
+            </Principal>
+            <Dependent Role="PREFERREDMETHODLINE">
+              <PropertyRef Name="PREFMETHID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -44,6 +649,105 @@
                 <ScalarProperty Name="emp_ID" ColumnName="emp_ID" />
                 <ScalarProperty Name="emp_FirstName" ColumnName="emp_FirstName" />
                 <ScalarProperty Name="emp_LastName" ColumnName="emp_LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCLEFREQUENCies">
+            <EntityTypeMapping TypeName="Model.CYCLEFREQUENCY">
+              <MappingFragment StoreEntitySet="CYCLEFREQUENCY">
+                <ScalarProperty Name="CYCLEFREQCOUNT" ColumnName="CYCLEFREQCOUNT" />
+                <ScalarProperty Name="CYCLEFREQNUMBER" ColumnName="CYCLEFREQNUMBER" />
+                <ScalarProperty Name="OBSID" ColumnName="OBSID" />
+                <ScalarProperty Name="OBSASSIGNID" ColumnName="OBSASSIGNID" />
+                <ScalarProperty Name="CYCLEFREQID" ColumnName="CYCLEFREQID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ELSTWAREHOUSEs">
+            <EntityTypeMapping TypeName="Model.ELSTWAREHOUSE">
+              <MappingFragment StoreEntitySet="ELSTWAREHOUSE">
+                <ScalarProperty Name="ELSTWHNAME" ColumnName="ELSTWHNAME" />
+                <ScalarProperty Name="ELSTWHID" ColumnName="ELSTWHID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MACHINEs">
+            <EntityTypeMapping TypeName="Model.MACHINE">
+              <MappingFragment StoreEntitySet="MACHINE">
+                <ScalarProperty Name="WHNAME" ColumnName="WHNAME" />
+                <ScalarProperty Name="WHID" ColumnName="WHID" />
+                <ScalarProperty Name="MNAME" ColumnName="MNAME" />
+                <ScalarProperty Name="MID" ColumnName="MID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MACHINETIMINGs">
+            <EntityTypeMapping TypeName="Model.MACHINETIMING">
+              <MappingFragment StoreEntitySet="MACHINETIMING">
+                <ScalarProperty Name="MID" ColumnName="MID" />
+                <ScalarProperty Name="MTDESC" ColumnName="MTDESC" />
+                <ScalarProperty Name="MTTIMINGTYPE" ColumnName="MTTIMINGTYPE" />
+                <ScalarProperty Name="MTDISTANCE" ColumnName="MTDISTANCE" />
+                <ScalarProperty Name="MTDURATION" ColumnName="MTDURATION" />
+                <ScalarProperty Name="MTENDTIME" ColumnName="MTENDTIME" />
+                <ScalarProperty Name="MTSTARTTIME" ColumnName="MTSTARTTIME" />
+                <ScalarProperty Name="MTMACHINETYPE" ColumnName="MTMACHINETYPE" />
+                <ScalarProperty Name="ELSTWHID" ColumnName="ELSTWHID" />
+                <ScalarProperty Name="MTID" ColumnName="MTID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OBSERVATIONs">
+            <EntityTypeMapping TypeName="Model.OBSERVATION">
+              <MappingFragment StoreEntitySet="OBSERVATION">
+                <ScalarProperty Name="OBSWARNINGFLAG" ColumnName="OBSWARNINGFLAG" />
+                <ScalarProperty Name="OBSNOTES" ColumnName="OBSNOTES" />
+                <ScalarProperty Name="OBSDURATION" ColumnName="OBSDURATION" />
+                <ScalarProperty Name="OBSDATETIME" ColumnName="OBSDATETIME" />
+                <ScalarProperty Name="OBSSHEETID" ColumnName="OBSSHEETID" />
+                <ScalarProperty Name="ELSTWHID" ColumnName="ELSTWHID" />
+                <ScalarProperty Name="OBSID" ColumnName="OBSID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OBSERVATIONASSIGNMENTs">
+            <EntityTypeMapping TypeName="Model.OBSERVATIONASSIGNMENT">
+              <MappingFragment StoreEntitySet="OBSERVATIONASSIGNMENT">
+                <ScalarProperty Name="OBSASSIGNSEQ" ColumnName="OBSASSIGNSEQ" />
+                <ScalarProperty Name="OBSASSIGNDESC" ColumnName="OBSASSIGNDESC" />
+                <ScalarProperty Name="OBSSHEETID" ColumnName="OBSSHEETID" />
+                <ScalarProperty Name="OBSASSIGNID" ColumnName="OBSASSIGNID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OBSERVATIONSHEETs">
+            <EntityTypeMapping TypeName="Model.OBSERVATIONSHEET">
+              <MappingFragment StoreEntitySet="OBSERVATIONSHEET">
+                <ScalarProperty Name="OBSSHEETDESC" ColumnName="OBSSHEETDESC" />
+                <ScalarProperty Name="OBSSHEETNAME" ColumnName="OBSSHEETNAME" />
+                <ScalarProperty Name="PREFMETHID" ColumnName="PREFMETHID" />
+                <ScalarProperty Name="ELSTWHID" ColumnName="ELSTWHID" />
+                <ScalarProperty Name="OBSSHEETID" ColumnName="OBSSHEETID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PREFERREDMETHODs">
+            <EntityTypeMapping TypeName="Model.PREFERREDMETHOD">
+              <MappingFragment StoreEntitySet="PREFERREDMETHOD">
+                <ScalarProperty Name="PREFMETHDESC" ColumnName="PREFMETHDESC" />
+                <ScalarProperty Name="PREFMETHNAME" ColumnName="PREFMETHNAME" />
+                <ScalarProperty Name="ELSTWHID" ColumnName="ELSTWHID" />
+                <ScalarProperty Name="PREFMETHID" ColumnName="PREFMETHID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PREFERREDMETHODLINEs">
+            <EntityTypeMapping TypeName="Model.PREFERREDMETHODLINE">
+              <MappingFragment StoreEntitySet="PREFERREDMETHODLINE">
+                <ScalarProperty Name="PREFMETHLINESEQ" ColumnName="PREFMETHLINESEQ" />
+                <ScalarProperty Name="PREFMETHLINEDESC" ColumnName="PREFMETHLINEDESC" />
+                <ScalarProperty Name="PREFMETHID" ColumnName="PREFMETHID" />
+                <ScalarProperty Name="PREFMETHLINEID" ColumnName="PREFMETHLINEID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
